@@ -30,7 +30,7 @@ class ExperienceBuffer:
 
 
 class QNetwork:
-    def __init__(self, state_size=9, discount=1, epsilon=1, epsilon_min=0.0001, epsilon_decay=9.9995):
+    def __init__(self, state_size=9, discount=1, epsilon=1, epsilon_min=0.0001, epsilon_decay=0.9995):
         self.state_size = state_size
         self.model = self._create_model()
         self.discount = discount
