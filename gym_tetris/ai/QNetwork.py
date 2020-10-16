@@ -11,18 +11,22 @@ IMAGE_PATH = os.path.join(os.path.dirname(__file__), 'model.png')
 LOG_DIR = os.path.join(os.path.dirname(__file__), 'logs')
 
 
+
 class ExperienceBuffer:
     def __init__(self, buffer_size=20000):
         self.buffer = []
+        self.index = 0
         self.buffer_size = buffer_size
 
     def add(self, experience):
-        if len(self.buffer) + len(experience) >= self.buffer_size:
-            self.buffer[0:(len(experience) + len(self.buffer)) - self.buffer_size] = []
-        self.buffer.extend(experience)
-
+        if len(self.buffer) < self.buffer_size:
+            self.buffer.append(experience)
+        else :
+            self.buffer[self.index%self.buffer_size]=experience
+        
     def sample(self, size):
         return random.sample(self.buffer, size)
+
 
 
 class QNetwork:
